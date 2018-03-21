@@ -1,0 +1,34 @@
+# Official language image. Look for the different tagged releases at:
+# https://hub.docker.com/r/library/ruby/tags/
+image: "ruby:2.4"
+
+# Cache gems in between builds
+cache:
+  paths:
+    - vendor/ruby
+
+# This is a basic example for a gem or script which doesn't use
+# services such as redis or postgres
+before_script:
+  - ruby -v                                   # Print out ruby version for debugging
+  - bundle install -j $(nproc) --path vendor  # Install dependencies into ./vendor/ruby
+
+# Build the gem and save as an artifact
+build:compile:
+  stage: build
+  script:
+  - rake build
+  artifacts:
+    paths:
+    - pkg
+
+test:unit:
+  script:
+  - rake test
+
+# Run rubocop
+test:rubocop:
+  script:
+  - rubocop
+  # allow failure until we actually address these recommendations
+  allow_failure: true
