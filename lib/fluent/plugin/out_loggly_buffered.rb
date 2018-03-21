@@ -21,6 +21,8 @@
 
 =end
 
+require 'fluent/output'
+
 class Fluent::LogglyOutputBuffered < Fluent::BufferedOutput
   Fluent::Plugin.register_output('loggly_buffered', self)
   config_param :loggly_url, :string, :default => nil
