@@ -22,3 +22,9 @@ build:compile:
     paths:
     - pkg
 
+# Run rubocop
+test:rubocop:
+  script:
+  - rubocop
+  # allow failure until we actually address these recommendations
+  allow_failure: true
