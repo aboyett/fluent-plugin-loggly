@@ -22,6 +22,10 @@ build:compile:
     paths:
     - pkg
 
+test:unit:
+  script:
+  - rake test
+
 # Run rubocop
 test:rubocop:
   script:
